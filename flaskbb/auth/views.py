@@ -35,6 +35,7 @@ from flaskbb.auth.forms import (
     ResetPasswordForm,
 )
 from flaskbb.extensions import db, limiter
+from flaskbb.utils.cloud_watch import increment_visit_counter
 from flaskbb.utils.helpers import (
     anonymous_required,
     enforce_recaptcha,
@@ -154,6 +155,7 @@ class Register(MethodView):
         return form
 
     def get(self):
+        increment_visit_counter("auth/register")
         return render_template("auth/register.html", form=self.form())
 
     def post(self):
