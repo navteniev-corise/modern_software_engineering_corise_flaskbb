@@ -3,7 +3,6 @@ resource "aws_cloudwatch_log_group" "flaskbb_app" {
   retention_in_days = 3
 }
 
-# CoRise TODO: create a new dashboard
 resource "aws_cloudwatch_dashboard" "flaskbb_main" {
   dashboard_name = "flaskbb_main"
 
@@ -87,7 +86,6 @@ resource "aws_cloudwatch_dashboard" "flaskbb_main" {
   })
 }
 
-#CoRise TODO: create metric alters
 resource "aws_cloudwatch_metric_alarm" "bot_attack" {
   alarm_name          = "bot_attack"
   comparison_operator = "GreaterThanOrEqualToThreshold"
