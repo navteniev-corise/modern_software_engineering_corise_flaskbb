@@ -14,11 +14,9 @@ jobs:
       if: ${{ github.event.workflow_run.conclusion == 'success' }} # Only when test completed successfully 
       steps:
         - name: Build binary distribution and upload to artifactory
-          if: ${{ github.event_name == 'push' }}
           run: zip -r "flaskbb_deploy-${{github.sha}}.zip" ./flaskbb ./.ebextensions wsgi.py setup.py setup.cfg requirements.txt flaskbb.cfg celery_worker.py
         
         - name: Upload application artifact
-          if: ${{ github.event_name == 'push' }}
           uses: actions/upload-artifact@v3
           with:
             name: flaskbb_application_artifact
