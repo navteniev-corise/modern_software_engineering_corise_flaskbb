@@ -13,6 +13,8 @@ jobs:
       runs-on: ubuntu-latest
       if: ${{ github.event.workflow_run.conclusion == 'success' }} # Only when test completed successfully 
       steps:
+        - uses: actions/checkout@v2
+        
         - name: Build binary distribution and upload to artifactory
           run: zip -r "flaskbb_deploy-${{github.sha}}.zip" ./flaskbb ./.ebextensions wsgi.py setup.py setup.cfg requirements.txt flaskbb.cfg celery_worker.py
         
